@@ -118,10 +118,6 @@ class MainActivity : AppCompatActivity() {
          */
         Log.d(TAG, "Before RunBlocking")
         runBlocking {
-            Log.d(TAG, "Start of RunBlocking")
-            delay(5000L)
-            Log.d(TAG, "End of RunBlocking")
-
             //we can also launch another coroutine inside runBlocking
             // RunBlocking Thread 1
             launch (Dispatchers.IO) {
@@ -133,11 +129,16 @@ class MainActivity : AppCompatActivity() {
                 delay(3000L)
                 Log.d(TAG, "Finished IO coroutine 2")
             }
-
+            Log.d(TAG, "Start of RunBlocking")
+            delay(5000L)
+            Log.d(TAG, "End of RunBlocking")
             // The delay in RunBlocking Thread 1 and thread2 won't addup because they are in 2 different threads
             // and both threads will execute simultaneously
         }
         Log.d(TAG, "After RunBlocking")
+
+
+
     }
 
     suspend fun pseudoNetworkCall1() : String {
